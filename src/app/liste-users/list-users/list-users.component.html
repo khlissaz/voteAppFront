@@ -1,0 +1,37 @@
+<div class="container">
+    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Users table</h3>
+
+
+
+    <div class="col-md-12 ">
+        <div class="row">
+            <button type="button" class="btn btn-outline-warning" (onClick)="openModalC()">
+                <i class="fa fa-user-plus"></i> add </button>
+        </div>
+
+        <div class="mat-elevation-z8" >
+
+            <table class="table table-bordered" >
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+
+                    </tr>
+                </thead>
+                <tbody *ngFor="let user  of users   ; let i = index">
+                        <tr>
+                            <td scope="col">{{i+1}}</td>
+                                <td>{{user.lastName}}  {{user.firstName}} </td>
+                                        <td>{{user.email}}</td>
+                                        
+                        </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

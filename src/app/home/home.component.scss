@@ -1,0 +1,16 @@
+.header {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: black;
+  min-height: 100vh;
+  background-image: linear-gradient( to right bottom, rgba(2, 2, 2, 0.972), rgba(133, 109, 109, 0.9)), url(../../assets/vote.jpg );
+  background-size: cover;
+  background-position: top;
+  position: relative;
+}
+.header_text {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}

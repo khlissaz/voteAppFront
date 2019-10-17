@@ -1,0 +1,32 @@
+<nav class="navbar navbar-dark bg-primary">
+  <a class="navbar-brand" href="#">Voting App</a>
+  <div  class="collapse navbar-collapse" id="navbarNavDropdown" >
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+
+        <a class="nav-item nav-link active" href="#">Home </a>
+
+      </li>
+      <li class="nav-item">
+
+        <a class="nav-item nav-link active" routerLink="/listesujets">Polls </a>
+
+      </li>
+    </ul>
+  </div>
+
+  <button class="btn btn-secondary" routerLink="/login" *ngIf="!authService.currentUserValue"> Login </button>
+    
+      <div class="dropdown" *ngIf="authService.currentUserValue">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">{{authService.currentUserValue.firstName}}
+          {{authService.currentUserValue.lastName}}</a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" routerLink="/profile">Profile</a>
+          <a class="dropdown-item" routerLink="/listeusers">Liste Users</a>
+          <a class="dropdown-item" (click)="authService.logout()">Logout</a>
+        </div>
+
+      </div>
+  
+</nav>

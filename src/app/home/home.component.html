@@ -1,0 +1,15 @@
+<div class="header">
+
+    <div class="header_text">
+        <h1 class="heading-primary">
+            <span class="heading-primary--main">Application de vote</span>
+
+        </h1>
+        <h3><span class="heading-primary--sub">Participez ou créez un vote</span></h3>
+        <a routerLink="/register" class="btn btn-primary" style="margin:5rem" *ngIf="!authService.currentUserValue">Créer un compte</a>
+        <a routerLink="/listesujets" class="btn btn-primary" style="margin:5rem" *ngIf="authService.currentUserValue">Voir la liste des sujets</a>
+
+
+    </div>
+
+</div>
