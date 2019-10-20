@@ -33,4 +33,8 @@ delete(user) {
  
     return this.http.post('http://localhost:4000/users/deleteUser/' + user.id,user);
 }
+  affectUser(idUser,id){
+  return this.http.post('http://localhost:4000/users/affect/'+idUser+ '/' +id ,idUser)
+
+}
 }
