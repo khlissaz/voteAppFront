@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SujetService } from '../services/sujet.service';
 import { Sujet } from '../modeles/sujet';
+import { UserService } from '../services/user.service';
 @Component({
   selector: 'app-vote',
   templateUrl: './vote.component.html',
@@ -11,7 +12,7 @@ export class VoteComponent implements OnInit {
   currentUser: any;
   cpt: Number;
   sujet:Sujet;
-  
+  isVoted:boolean=false;
  
   public chartType:string = 'pie';
 
@@ -37,7 +38,7 @@ public chartClicked(e: any): void {
 public chartHovered(e: any): void { 
      
 }
-  constructor(private sujetService: SujetService) {
+  constructor(private sujetService: SujetService, private userService: UserService) {
     this.currentSujet = JSON.parse(localStorage.getItem("currentSujet"));
     this.currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
@@ -51,34 +52,43 @@ public chartHovered(e: any): void {
     }
 
   VoterOui() {
+    if(!this.voted(this.currentSujet._id)){
+      if(this.currentUser.sujets.length<5)
+      {
 this.currentSujet.participants++
 
   this.currentSujet.choix[0]=this.currentSujet.choix[0]+1;
  
   
-  this.sujetService.updateSujet(this.currentSujet).subscribe(result => {
+  this.userService.affectUser(this.currentUser._id,this.currentSujet._id).subscribe(result => {
       console.log(result)
       error => {
                 console.log(error)
     }
     })
     this.updateChart();
-
+  } else alert("Vous ne pouvez voter que 5 sujets!!!")
+} else alert("Vous avez dejà voté ce sujet!!!")
   }
 
 
   VoterNon() {
+    if(!this.voted(this.currentSujet._id)){
+      if(this.currentUser.sujets.length<5)
+      {
     this.currentSujet.participants++
 
     this.currentSujet.choix[1]=this.currentSujet.choix[1]+1;
-    
-    this.sujetService.update(this.currentSujet).subscribe(result => {
+    this.sujetService.updateSujet(this.currentSujet);
+    this.userService.affectUser(this.currentUser._id,this.currentSujet._id).subscribe(result => {
       console.log(result)
     })
      this.updateChart()
-  }
-
-
+    
+     
+    } else alert("Vous ne pouvez voter que 5 sujets!!!")
+  } else alert("Vous avez dejà voté ce sujet!!!")
+}
 
   updateChart(){
     this.chartEmpty = true;
@@ -86,7 +96,14 @@ this.currentSujet.participants++
     this.chartData = this.currentSujet.choix;
     
   }
+  voted(id){
+    for(var i; i< this.currentUser.sujets.length; i++){
+      if (this.currentUser.sujets[i]._id=id){
+        this.isVoted==true;
+      }
+    }
+    return this.isVoted;
+  }
 
   
-
 }
